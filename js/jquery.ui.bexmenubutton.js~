@@ -164,7 +164,7 @@
 					});
 			return self;
 		},
-		controller: function() {
+		controller: function() { 
 			var self = this;
 			return $(self.element).parents('.bex-textnode, .bex-element').first();
 		},
@@ -179,17 +179,28 @@
 })(jQuery);
 
 /*
+
+	TODO: Make bexmenubutton apply to the controlling element. It will either find and use an existing button as the button or, if it cannot, it will just append a button.
+
+	Commands are always user-facing and if they require parameters, will demand them.
+
 	addCommand ( {
 		name: 'insertBefore',
-		data: function(){},
-	});
+		action: function(){}
+	}); # also overwrites existing commands.
+	removeCommand ( {
+		name: 'insertBefore',
+	}); # also iterates through the menu and keyboard shortcuts and unbinds them.
+	replaceCommand # alias for addCommand 
 	addMenuCommand ({
 		name: 'insertBeforePreceding'
 		path: []
+		action: function(){} | commandName ==> function(){execCommand()}
 	});
 	addKeyboardShortcut ({
 		ctrl: 1,
 		keyCode: 39
+		action: function(){} | commandName ==> function(){execCommand()}
 	});
 	execCommand ({
 		
