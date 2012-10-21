@@ -12,8 +12,9 @@
 				.addClass("ui-widget bex-textnode ui-helper-reset")
 				.bexchildnode();
 			var
-				menu = $("<button></button>").bexmenubutton().appendTo(el),
+				menu = $("<button></button>").appendTo(el),
 				textcontainer = $("<span></span>").text(textcontent).bextextcontainer().appendTo(el);
+			el.bexmenubutton({"button": menu})
 			self._trigger("added", null);
 			return self;
 		},

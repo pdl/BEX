@@ -5,8 +5,13 @@
 		_create: function() {
 			var self = this;
 			var	o = self.options;
-			var	el = self.element
-					.button({
+			var	el = self.element;
+			var button = self.options.button;
+			if (!typeof button){ 
+				button = $("<button></button>").appendTo(el)
+			}
+			self.button = button;
+			button.button({
 						text: false,
 						icons: {
 							primary: "ui-icon-triangle-1-s"
@@ -23,9 +28,9 @@
 									{
 										label: "Before Preceding",
 										action: function(){
-											var controller = self.controller();
+											var controller = self.element;
 											$(controller).bexchildnode('precedingSibling').bexchildnode("insertPreceding", controller);
-											$(self.element).focus();
+											$(self.button).focus();
 										}
 									}
 								]
@@ -33,7 +38,7 @@
 							{
 								label: "Delete",
 								action: function(){
-									$(self.controller()).bexchildnode('removeNode');
+									$(self.element).bexchildnode('removeNode');
 								}
 							}
 						];
@@ -53,12 +58,12 @@
 						for (var i=0; i<menuoptions.length; i++){
 							add_menuoption(bexcontextmenu, menuoptions[i]);
 						}
-						bexcontextmenu.menu().show().appendTo(self.controller());
+						bexcontextmenu.menu().show().appendTo(self.button);
 					})
 					/* Define the keyboard commands */
 					.keyup(function(e){
 						/* alert( "Keyup " + e.keyCode + " CtrlKey: "+e.ctrlKey); */
-						var controller = self.controller();
+						var controller = self.element;
 						var keyCode = e.keyCode;
 						
 						if (e.ctrlKey)
@@ -67,19 +72,19 @@
 							{
 								case 37: /*LEFT: Insert after parent*/
 									$(controller).bexchildnode('parent').bexchildnode("insertFollowing", controller);
-									$(self.element).focus();
+									$(self.button).focus();
 									break;
 								case 38: /*UP: Insert before previous*/
 									$(controller).bexchildnode('precedingSibling').bexchildnode("insertPreceding", controller);
-									$(self.element).focus();
+									$(self.button).focus();
 									break;
 								case 39: /*RIGHT: Append to previous*/
 									$(controller).bexchildnode('precedingSibling').bexparentnode("append", controller);
-									$(self.element).focus();
+									$(self.button).focus();
 									break;
 								case 40: /*DOWN: Insert after following */
 									$(controller).bexchildnode('followingSibling').bexchildnode("insertFollowing", controller);
-									$(self.element).focus();
+									$(self.button).focus();
 									break;
 								case 46: /*DELETE*/
 									$( "#bex-dlg-confirm-delete" ).dialog({
@@ -88,8 +93,8 @@
 										modal: true,
 										title: 'Confirm node deletion',
 										close: function(){
-											if (self.element){
-												self.element.focus();
+											if (self.button){
+												self.button.focus();
 											}
 										},
 										buttons: {
@@ -108,8 +113,8 @@
 										modal: true,
 										title: 'Insert Node',
 										close: function(){
-											if (self.element){
-												self.element.focus();
+											if (self.button){
+												self.button.focus();
 											}
 										},
 										buttons: {
@@ -164,10 +169,6 @@
 					});
 			return self;
 		},
-		controller: function() { 
-			var self = this;
-			return $(self.element).parents('.bex-textnode, .bex-element').first();
-		},
 		destroy: function() {
 			
 		},
@@ -191,7 +192,7 @@
 	removeCommand ( {
 		name: 'insertBefore',
 	}); # also iterates through the menu and keyboard shortcuts and unbinds them.
-	replaceCommand # alias for addCommand 
+	replaceCommand # alias for addCommand
 	addMenuCommand ({
 		name: 'insertBeforePreceding'
 		path: []
