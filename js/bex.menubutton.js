@@ -174,14 +174,21 @@
 		},
 		addCommand: function(command) {
 			var self = this;
+			var commands = self.commands;
+			commands[command.name] = command;
+			/*
 			if (command.name && validName.match(command.name)){
-				//self.commands.(command.name) = command;
+				self.commands[command.name] = command;
 			}
 			if (command.name && validBexName.match(command.name)){
-				//command.action = function () {self.element.(ns)(method)}
-				//self.commands.(command.name) = command;
-			}
+				command.action = function () {self.element[ns](method)}
+				self.commands[command.name] = command;
+			}*/
 			return self;
+		},
+		execCommand: function(commandName){
+			var self = this;
+			self.commands[commandName](self);
 		},
 		destroy: function() {
 			
@@ -196,9 +203,9 @@
 /*
 
 	DONE: Make bexmenubutton apply to the controlling element. It will either find and use an existing button as the button or, if it cannot, it will just append a button.
-
+ 
 	Commands are always user-facing and if they require parameters, will demand them.
-
+	TODO: Write the following methods
 	addCommand ( {
 		name: 'insertBefore',
 		action: function(){}
