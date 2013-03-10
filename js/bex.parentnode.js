@@ -1,5 +1,5 @@
 (function($) {
-	$.widget("ui.bexparentnode", {
+	$.widget("bex.bexparentnode", {
 		options: {
 		},
 		_create: function() {

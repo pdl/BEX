@@ -1,5 +1,5 @@
 (function($) {
-	$.widget("ui.bexcommentnode", {
+	$.widget("bex.bexcommentnode", {
 		options: {
 			
 		},

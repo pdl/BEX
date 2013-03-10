@@ -14,7 +14,7 @@ Used by:
 
 */
 (function($) {
-	$.widget("ui.bexchildnode", {
+	$.widget("bex.bexchildnode", {
 		options: {
 			
 		},

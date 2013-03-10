@@ -1,5 +1,5 @@
 (function($) {
-	$.widget("ui.bexelement", {
+	$.widget("bex.bexelement", {
 		options: {
 			from: $('<element/>')
 		},
@@ -10,7 +10,8 @@
 					.addClass("ui-widget ui-widget-contents ui-helper-reset bex-element");
 			var	bexheader = $('<div></div>').addClass("ui-widget-header ui-corner-all bex-element-header").appendTo(el);
 			el.bexparentnode().bexchildnode();
-			var	menu = $("<button></button>").bexmenubutton().appendTo(bexheader);
+			var	menu = $("<button></button>").appendTo(bexheader);
+			el.bexmenubutton({"button": menu});
 			var	bexnodename = $('<span></span>')
 					.text(o.from[0].nodeName)
 					.bextextcontainer({pattern:'[a-zA-Z][\w]*'})

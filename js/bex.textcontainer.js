@@ -1,5 +1,5 @@
 (function($) {
-    $.widget("ui.bextextcontainer", {
+    $.widget("bex.bextextcontainer", {
 		options: {
 			pattern: ''
 		},

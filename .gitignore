@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 *.bak
 *~
 *.old
@@ -17,3 +18,7 @@ MYMETA.*
 .TemporaryItems
 .Trashes
 .fseventsd
+=======
+*~
+
+>>>>>>> 60feba2b59bf545d08f8c334ceec8305de73b4d9

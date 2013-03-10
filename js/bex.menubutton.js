@@ -1,12 +1,20 @@
 (function($) {
-    $.widget("ui.bexmenubutton", {
+	var validName =  "[a-zA-Z_][a-zA-Z_0-9\-]*";
+	var validBexName =  "bex\.(menubutton|elementnode|childnode|documentnode|parentnode|[a-z]+)\.([a-zA-Z_][a-zA-Z_0-9\-]*)";
+	$.widget("bex.bexmenubutton", {
 		options: {
+			commands: {}
 		},
 		_create: function() {
 			var self = this;
 			var	o = self.options;
-			var	el = self.element
-					.button({
+			var	el = self.element;
+			var button = self.options.button;
+			if (!typeof button){ 
+				button = $("<button></button>").appendTo(el)
+			}
+			self.button = button;
+			button.button({
 						text: false,
 						icons: {
 							primary: "ui-icon-triangle-1-s"
@@ -23,9 +31,9 @@
 									{
 										label: "Before Preceding",
 										action: function(){
-											var controller = self.controller();
+											var controller = self.element;
 											$(controller).bexchildnode('precedingSibling').bexchildnode("insertPreceding", controller);
-											$(self.element).focus();
+											$(self.button).focus();
 										}
 									}
 								]
@@ -33,7 +41,7 @@
 							{
 								label: "Delete",
 								action: function(){
-									$(self.controller()).bexchildnode('removeNode');
+									$(self.element).bexchildnode('removeNode');
 								}
 							}
 						];
@@ -53,12 +61,12 @@
 						for (var i=0; i<menuoptions.length; i++){
 							add_menuoption(bexcontextmenu, menuoptions[i]);
 						}
-						bexcontextmenu.menu().show().appendTo(self.controller());
+						bexcontextmenu.menu().show().appendTo(self.button);
 					})
 					/* Define the keyboard commands */
 					.keyup(function(e){
 						/* alert( "Keyup " + e.keyCode + " CtrlKey: "+e.ctrlKey); */
-						var controller = self.controller();
+						var controller = self.element;
 						var keyCode = e.keyCode;
 						
 						if (e.ctrlKey)
@@ -67,19 +75,19 @@
 							{
 								case 37: /*LEFT: Insert after parent*/
 									$(controller).bexchildnode('parent').bexchildnode("insertFollowing", controller);
-									$(self.element).focus();
+									$(self.button).focus();
 									break;
 								case 38: /*UP: Insert before previous*/
 									$(controller).bexchildnode('precedingSibling').bexchildnode("insertPreceding", controller);
-									$(self.element).focus();
+									$(self.button).focus();
 									break;
 								case 39: /*RIGHT: Append to previous*/
 									$(controller).bexchildnode('precedingSibling').bexparentnode("append", controller);
-									$(self.element).focus();
+									$(self.button).focus();
 									break;
 								case 40: /*DOWN: Insert after following */
 									$(controller).bexchildnode('followingSibling').bexchildnode("insertFollowing", controller);
-									$(self.element).focus();
+									$(self.button).focus();
 									break;
 								case 46: /*DELETE*/
 									$( "#bex-dlg-confirm-delete" ).dialog({
@@ -88,8 +96,8 @@
 										modal: true,
 										title: 'Confirm node deletion',
 										close: function(){
-											if (self.element){
-												self.element.focus();
+											if (self.button){
+												self.button.focus();
 											}
 										},
 										buttons: {
@@ -108,8 +116,8 @@
 										modal: true,
 										title: 'Insert Node',
 										close: function(){
-											if (self.element){
-												self.element.focus();
+											if (self.button){
+												self.button.focus();
 											}
 										},
 										buttons: {
@@ -164,9 +172,23 @@
 					});
 			return self;
 		},
-		controller: function() { 
+		addCommand: function(command) {
 			var self = this;
-			return $(self.element).parents('.bex-textnode, .bex-element').first();
+			var commands = self.commands;
+			commands[command.name] = command;
+			/*
+			if (command.name && validName.match(command.name)){
+				self.commands[command.name] = command;
+			}
+			if (command.name && validBexName.match(command.name)){
+				command.action = function () {self.element[ns](method)}
+				self.commands[command.name] = command;
+			}*/
+			return self;
+		},
+		execCommand: function(commandName){
+			var self = this;
+			self.commands[commandName](self);
 		},
 		destroy: function() {
 			
@@ -180,10 +202,10 @@
 
 /*
 
-	TODO: Make bexmenubutton apply to the controlling element. It will either find and use an existing button as the button or, if it cannot, it will just append a button.
-
+	DONE: Make bexmenubutton apply to the controlling element. It will either find and use an existing button as the button or, if it cannot, it will just append a button.
+ 
 	Commands are always user-facing and if they require parameters, will demand them.
-
+	TODO: Write the following methods
 	addCommand ( {
 		name: 'insertBefore',
 		action: function(){}

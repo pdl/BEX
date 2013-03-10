@@ -1,5 +1,5 @@
 (function($) {
-    $.widget("ui.bexcontents", {
+    $.widget("bex.bexcontents", {
 		options: {
 		},
 		_create: function() {
