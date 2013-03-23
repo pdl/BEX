@@ -28,10 +28,6 @@ This software is pre-alpha and in deveopment. Key initial goals are:
 - A DOM which lets you do anything you should be able to do but nothing you shouldn't
 - An interface that is fully keyboard and touch accessible
 
-# AUTHOR #
-
-Copyright Daniel Perrett, perrettdl@googlemail.com
-
 # LICENSE #
 
 Copyright 2010-2013 Daniel Perrett (perrettdl@googlemail.com)
