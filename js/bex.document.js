@@ -78,7 +78,7 @@
 			return source;
 		},
 		xmlpreview: function(){
-			return this.xml(); // TODO: Add a callback so that users can insert their own XSLT. 
+			return this.xml(); // TODO: Add a callback so that users can insert their own XSLT. BUT isn't this its own callback?
 		},
 		tree: function(){
 			var	xml = $(this.element).val();
