@@ -46,3 +46,16 @@ before
 after
 
 $text->bisect ::= insertAfter, substring
+
+### Attributes
+addAttribute
+setAtrribute
+removeAttribute
+renameAttribute (derived from add and remove)
+
+#### Focus
+
+Focus vs selection:
+What has focus has selection by default, and does not lose it until another element gains focus, unless:
+a) text selection within an element
+b) Selection of multiple elements is happening (document-wide flag)
