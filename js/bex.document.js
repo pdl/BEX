@@ -3,7 +3,7 @@
 		options: {
 		},
 		_create: function() {
-			
+
 			var	self = this;
 			var	o = self.options;
 			var	el = self.element;
@@ -50,7 +50,7 @@
 </form>\
 </div>').hide().appendTo(self.bexdocument);
 			$('#bex-insert-location').buttonset();
-			zen_textarea.setup({pretty_break: true, use_tab: false});
+			//zen_textarea.setup({pretty_break: true, use_tab: false});
 			return self;
 		},
 		showpreview: function(){
@@ -88,7 +88,7 @@
 			$(this.bexdocument).bexparentnode(
 				"append",
 				$("<li></li>")
-					.bexelement({"from": root}) 
+					.bexelement({"from": root})
 			).find('button').first().focus();
 		},
 		destroy: function() {
@@ -96,7 +96,7 @@
 		},
 		_setOption: function(option, value) {
 			$.Widget.prototype._setOption.apply( this, arguments );
-			
+
 		}
 	});
 })(jQuery);
