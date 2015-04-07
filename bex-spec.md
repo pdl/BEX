@@ -27,17 +27,22 @@ remove
 
 children
 parent
-following
-preceding
+ancestors
+descendants
+followingSibling
+followingSiblings
+precedingSibling
+precedingSiblings
 attributes
+attribute()
 name
 
 ### Derived methods
 
 #### Manipulation
 
-moveBeforePrevious
-moveAfterNext
+moveBeforePreceding
+moveAfterFollowing
 moveAfterParent
 moveIntoPreceding
 append
