@@ -6,10 +6,10 @@
 			/*self._trigger("added", null);*/
 			var self = this;
 			var bexcontents = $('<ul></ul>')
-					.addClass("ui-helper-reset bex-contents")
+					.addClass("bex-contents")
 					.sortable({
 						connectWith: ".bex-contents",
-						placeholder: "ui-state-highlight"
+						placeholder: "bex-placeholder"
 					})
 					.appendTo(self.element)
 					.disableSelection();

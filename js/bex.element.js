@@ -7,8 +7,8 @@
 			var	self = this;
 			var	o = self.options;
 			var	el = self.element
-					.addClass("ui-widget ui-widget-contents ui-helper-reset bex-element");
-			var	bexheader = $('<div></div>').addClass("ui-widget-header ui-corner-all bex-element-header").appendTo(el);
+					.addClass("bex-element");
+			var	bexheader = $('<div></div>').addClass("bex-element-header").appendTo(el);
 			el.bexparentnode().bexchildnode();
 			var	menu = $("<button></button>").appendTo(bexheader);
 			el.bexmenubutton({"button": menu});
@@ -17,12 +17,12 @@
 					.bextextcontainer({pattern:'[a-zA-Z][\w]*'})
 					.addClass("bex-element-name")
 					.appendTo(bexheader);
-			self.bexnodename = bexnodename; 
+			self.bexnodename = bexnodename;
 			$(o.from).contents().each(function(){ /*use contents().each() then determine nodetype*/
 				if (this.nodeType == 1)
 				{
 					$(self.element).bexparentnode(
-						"append", $("<li></li>").bexelement({from: $(this)})	
+						"append", $("<li></li>").bexelement({from: $(this)})
 					);
 				}
 				else if (this.nodeType == 3)
@@ -105,10 +105,10 @@
 				xml += '/>';
 			}
 			return xml;
-			
+
 		},
 		destroy: function() {
-			
+
 		},
 		_setOption: function(option, value) {
 			$.Widget.prototype._setOption.apply( this, arguments );

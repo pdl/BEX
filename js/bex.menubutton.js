@@ -10,7 +10,7 @@
 			var	o = self.options;
 			var	el = self.element;
 			var button = self.options.button;
-			if (!typeof button){ 
+			if (!typeof button){
 				button = $("<button></button>").appendTo(el)
 			}
 			self.button = button;
@@ -20,7 +20,7 @@
 							primary: "ui-icon-triangle-1-s"
 						}
 					})
-					.addClass("bex-handle ui-corner-left")
+					.addClass("bex-handle")
 					.removeClass("ui-corner-all")
 					.click(function(){
 						/* todo: menu here */
@@ -68,7 +68,7 @@
 						/* alert( "Keyup " + e.keyCode + " CtrlKey: "+e.ctrlKey); */
 						var controller = self.element;
 						var keyCode = e.keyCode;
-						
+
 						if (e.ctrlKey)
 						{
 							switch (keyCode)
@@ -191,11 +191,11 @@
 			self.commands[commandName](self);
 		},
 		destroy: function() {
-			
+
 		},
 		_setOption: function(option, value) {
 			$.Widget.prototype._setOption.apply( this, arguments );
-			
+
 		}
 	});
 })(jQuery);
@@ -203,7 +203,7 @@
 /*
 
 	DONE: Make bexmenubutton apply to the controlling element. It will either find and use an existing button as the button or, if it cannot, it will just append a button.
- 
+
 	Commands are always user-facing and if they require parameters, will demand them.
 	TODO: Write the following methods
 	addCommand ( {
@@ -225,6 +225,6 @@
 		action: function(){} | commandName ==> function(){execCommand()}
 	});
 	execCommand ({
-		
+
 	});
 */

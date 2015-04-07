@@ -4,11 +4,11 @@
 			pattern: ''
 		},
 		_create: function() {
-			
+
 			var self = this;
 			var	o = self.options;
 			var	el = self.element
-					.addClass("ui-widget ui-widget-content ui-corner-right bex-textcontainer")
+					.addClass("bex-textcontainer")
 					.click(function(){self.wake()});
 			return self;
 		},
@@ -37,7 +37,7 @@
 		sleep: function(){
 			var inputs = this.element.find("textarea");
 			if (inputs.length > 0)
-			{			
+			{
 				var textcontent = $(inputs[0]).val();
 				this.element.empty().text(textcontent);
 			}
@@ -52,7 +52,7 @@
 		},
 		_setOption: function(option, value) {
 			$.Widget.prototype._setOption.apply( this, arguments );
-			
+
 		}
 	});
 })(jQuery);

@@ -8,13 +8,13 @@
 			var	o = self.options;
 			var	el = self.element;
 			self.bexdocument = $('<div></div>')
-				.addClass("ui-widget ui-widget-contents ui-helper-reset bex-document")
+				.addClass("bex-document")
 				.insertAfter(el).append(el);
 			self.bexpreview = $('<div></div>')
-				.addClass("ui-widget ui-widget-contents ui-helper-reset bex-preview")
+				.addClass("bex-preview")
 				.appendTo(self.bexdocument);
 			self.bexheader = $('<div></div>')
-				.addClass("ui-widget-header ui-corner-all bex-document-header")
+				.addClass("bex-document-header")
 				.prependTo(self.bexdocument)
 				.append(
 					$('<button class="bex-show-tree">Tree</button>').button().click(function(){

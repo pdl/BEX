@@ -3,14 +3,14 @@
 		options: {
 		},
 		_create: function() {
-			
+
 			var self = this,
 				o = self.options,
 				el = self.element
-					.addClass("ui-helper-reset bex-contents")
+					.addClass("bex-contents")
 					.sortable({
 						connectWith: ".bex-contents",
-						placeholder: "ui-state-highlight"
+						placeholder: "bex-placeholder"
 					})
 					.disableSelection();
 			return self;
@@ -20,7 +20,7 @@
 		},
 		_setOption: function(option, value) {
 			$.Widget.prototype._setOption.apply( this, arguments );
-			
+
 		}
 	});
 })(jQuery);

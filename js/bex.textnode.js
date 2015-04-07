@@ -1,7 +1,7 @@
 (function($) {
 	$.widget("bex.bextextnode", {
 		options: {
-			
+
 		},
 		_create: function() {
 			var self = this,
@@ -9,7 +9,7 @@
 				el = self.element,
 				textcontent = el.text();
 			el	.empty()
-				.addClass("ui-widget bex-textnode ui-helper-reset")
+				.addClass("bex-textnode")
 				.bexchildnode();
 			var
 				menu = $("<button></button>").appendTo(el),
@@ -33,11 +33,11 @@
 			this.element.empty().text(textcontent);
 		},
 		xml: function(){
-			return this.sleep().element.find(".bex-textcontainer")[0].innerHTML; 
+			return this.sleep().element.find(".bex-textcontainer")[0].innerHTML;
 		},
 		_setOption: function(option, value) {
 			$.Widget.prototype._setOption.apply( this, arguments );
-			
+
 		}
 	});
 })(jQuery);
