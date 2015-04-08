@@ -1,22 +1,28 @@
+.bex-document, .bex-document * { margin: 0; padding: 0; border: 0px; background: transparent; color: inherit; width: auto; }
+
 .ui-caption { display:none; position:absolute; padding:10px; }
 
 .bex-textcontainer, .bex-textnode {background: none;}
 /*.bex-textnode-header {display: block; float: left; margin-left: 0em; width: 2em; height: 2em; }
 .bex-handle {display: inline-block; width: 1em; height: 1em; }*/
-.bex-textcontainer {display: block; margin-left: 1.5em; padding: 0.25em; white-space: pre-wrap;}
+.bex-textcontainer {display: block; margin-left: 2.5em; padding: 0.25em; white-space: pre-wrap;}
 .bex-textnode, .bex-element-header {position:relative; display:inline-block}
 .bex-element {position: relative;}
-.bex-handle {position: absolute; top: 0; left: 0; width: 1.5em !important; height: 100%;}
+.bex-handle {position: absolute; top: 0; left: 0; width: 2em !important; height: 100%;}
 
-.bex-textcontainer>textarea {display: block; width: 100%;} 
+.bex-textcontainer>textarea {display: block; width: 100%;}
 .bex-element-header textarea {display: inline; height: 1em;}
-.bex-textcontainer>textarea, 
-.bex-element-header textarea 
+.bex-textcontainer>textarea,
+.bex-element-header textarea
 {
 	border: none;
 	background: none;
 }
 
+.bex-contents, .bex-contents>li {
+	display: block;
+	list-style-type: none;
+}
 .bex-contents>li{min-height: 1.5em;}
 .bex-contents {padding-left: 1em;}
 .bex-element-name {display:inline-block;}
@@ -33,5 +39,11 @@
 
 #bex-insert-location>label{width:50%;}
 
-.bex-contextmenu {float: left; position: absolute; top: 0em; left: 1.5em; z-index: 3300;}
+.bex-contextmenu {float: left; position: absolute; top: 0em; left: 2.5em; z-index: 3300;}
 
+.bex-contents>li { margin: 0.5em 0; }
+.bex-element-header { border: 1px solid #c0c0c0; padding: 0.25em; margin: -1px;}
+.bex-handle:before { content:'⏷'; display: inline-block; vertical-align: top; } /* ⛛⌄⌵⏷ */
+
+.bex-handle { min-width: 2em; height: 100%;  border-right: 1px solid #c0c0c0; background-color: #e0e0e0; }
+.bex-handle:focus { background-color: #60c0c0;}
