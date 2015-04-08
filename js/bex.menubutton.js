@@ -74,22 +74,34 @@
 							switch (keyCode)
 							{
 								case 37: /*LEFT: Insert after parent*/
+									// TODO: refactor into self.insertAfterParent
 									$(controller).bexchildnode('parent').bexchildnode("insertFollowing", controller);
 									$(self.button).focus();
 									break;
 								case 38: /*UP: Insert before previous*/
+									// TODO: refactor into self.insertBeforePrevious
 									$(controller).bexchildnode('precedingSibling').bexchildnode("insertPreceding", controller);
 									$(self.button).focus();
 									break;
 								case 39: /*RIGHT: Append to previous*/
+									// TODO: refactor into self.appendToPrevious
 									$(controller).bexchildnode('precedingSibling').bexparentnode("append", controller);
 									$(self.button).focus();
 									break;
 								case 40: /*DOWN: Insert after following */
+									// TODO: refactor into self.insertAfterFollowing
 									$(controller).bexchildnode('followingSibling').bexchildnode("insertFollowing", controller);
 									$(self.button).focus();
 									break;
 								case 46: /*DELETE*/
+									// TODO: refactor into self.proposeDeletion()
+									var nextNode =
+										$(controller).bexchildnode('followingSibling')
+										||
+										$(controller).bexchildnode('precedingSibling')
+										||
+										$(controller).bexchildnode('parent');
+									// TODO: Creating modals should be a method on the documentEditor
 									$( "#bex-dlg-confirm-delete" ).dialog({
 										resizable: false,
 										height: 140,
@@ -97,13 +109,14 @@
 										title: 'Confirm node deletion',
 										close: function(){
 											if (self.button){
-												self.button.focus();
+												$(self.button).focus();
 											}
 										},
 										buttons: {
 											"Delete": function() {
 												$(controller).bexchildnode('removeNode');
 												$( this ).dialog( "close" );
+												nextNode.find('button').first().focus();
 											},
 											"Cancel": function() {
 												$( this ).dialog( "close" );
@@ -112,6 +125,7 @@
 									});
 									break;
 								case 73: /* CTRL + I */
+									// TODO: Creating modals should be a method on the documentEditor
 									$( "#bex-dlg-insert" ).dialog({
 										modal: true,
 										title: 'Insert Node',
