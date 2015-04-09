@@ -5,18 +5,21 @@
 .bex-textcontainer, .bex-textnode {background: none;}
 /*.bex-textnode-header {display: block; float: left; margin-left: 0em; width: 2em; height: 2em; }
 .bex-handle {display: inline-block; width: 1em; height: 1em; }*/
-.bex-textcontainer {display: block; margin-left: 2.5em; padding: 0.25em; white-space: pre-wrap;}
 .bex-textnode, .bex-element-header {position:relative; display:inline-block}
 .bex-element {position: relative;}
 .bex-handle {position: absolute; top: 0; left: 0; width: 2em !important; height: 100%;}
 
-.bex-textcontainer>textarea {display: block; width: 100%;}
-.bex-element-header textarea {display: inline; height: 1em;}
+.bex-textcontainer           { display: block;        white-space: pre-wrap; margin-left: 2.5em; padding: 0.25em; }
+.bex-textcontainer>textarea  { display: block;        white-space: pre-wrap; width: 100%; }
+.bex-element-header textarea { display: inline-block; white-space: pre;      min-width: 4em; }
+
 .bex-textcontainer>textarea,
 .bex-element-header textarea
 {
 	border: none;
 	background: none;
+	height: 1.5em;
+	overflow: visible;
 }
 
 .bex-contents, .bex-contents>li {
@@ -46,4 +49,20 @@
 .bex-handle:before { content:'⏷'; display: inline-block; vertical-align: top; } /* ⛛⌄⌵⏷ */
 
 .bex-handle { min-width: 2em; height: 100%;  border-right: 1px solid #c0c0c0; background-color: #e0e0e0; }
+
+.bex-document-header {
+	min-width: 2em;
+	border: 1px solid #c0c0c0;
+	padding: 0.25em;
+	margin: 0.25em;
+}
+
+.bex-document-header>button {
+	min-width: 2em;
+	border:1px solid #c0c0c0;
+	background-color: #e0e0e0;
+	padding: 0.25em;
+	margin: 0.25em;
+}
+.bex-document-header>button:focus,
 .bex-handle:focus { background-color: #60c0c0;}
