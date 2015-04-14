@@ -1,5 +1,17 @@
+/*
+** bex.bextextcontainer
+**
+** This widget provides functions wake and sleep.
+**
+** - wake takes the element's contents and place them inside a textarea to be edited.
+** - sleep returns the element to its normal state
+**
+** This is used because textareas are expensive to render.
+**
+*/
+
 (function($) {
-    $.widget("bex.bextextcontainer", {
+	$.widget("bex.bextextcontainer", {
 		options: {
 			pattern: ''
 		},
