@@ -66,3 +66,30 @@
 }
 .bex-document-header>button:focus,
 .bex-handle:focus { background-color: #60c0c0;}
+
+
+.bex-document {
+	position: relative;
+}
+
+.bex-modal-overlay {
+	background-color: #808080;
+	background: rgba(128,128,128,0.5);
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+
+}
+.bex-modal {
+	border: 1px solid #c0c0c0;
+	box-shadow: 2px 2px 4px #000;
+	max-height: 24em;
+	overflow-y: scroll;
+	background-color: #fff;
+	margin: 2em;
+}
+/*
+** $('.bex-document').append('<div class="bex-modal-overlay"></div>')
+*/

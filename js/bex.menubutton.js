@@ -64,7 +64,7 @@
 						bexcontextmenu.menu().show().appendTo(self.button);
 					})
 					/* Define the keyboard commands */
-					.keyup(function(e){
+					.keyup(function(e){ // todo: prevent default actions like scrolling; ctrl+i on firefox, etc.
 						/* alert( "Keyup " + e.keyCode + " CtrlKey: "+e.ctrlKey); */
 						var controller = self.element;
 						var keyCode = e.keyCode;
@@ -101,59 +101,64 @@
 										$(controller).bexchildnode('precedingSibling')
 										||
 										$(controller).bexchildnode('parent');
-									// TODO: Creating modals should be a method on the documentEditor
-									$( "#bex-dlg-confirm-delete" ).dialog({
-										resizable: false,
-										height: 140,
-										modal: true,
-										title: 'Confirm node deletion',
-										close: function(){
-											if (self.button){
-												$(self.button).focus();
-											}
-										},
-										buttons: {
-											"Delete": function() {
-												$(controller).bexchildnode('removeNode');
-												$( this ).dialog( "close" );
-												nextNode.find('button').first().focus();
-											},
-											"Cancel": function() {
-												$( this ).dialog( "close" );
-											}
-										}
-									});
+									var bexdocument = self.element.parents('.bex-document').first().find('>textarea').first();
+									// bexdocument.bexdocument('spawnmodal', 'insertNode');
+									// $( "#bex-dlg-confirm-delete" ).dialog({
+									// 	resizable: false,
+									// 	height: 140,
+									// 	modal: true,
+									// 	title: 'Confirm node deletion',
+									// 	close: function(){
+									// 		if (self.button){
+									// 			$(self.button).focus();
+									// 		}
+									// 	},
+									// 	buttons: {
+									// 		"Delete": function() {
+									// 			$(controller).bexchildnode('removeNode');
+									// 			$( this ).dialog( "close" );
+									// 			nextNode.find('button').first().focus();
+									// 		},
+									// 		"Cancel": function() {
+									// 			$( this ).dialog( "close" );
+									// 		}
+									// 	}
+									// });
 									break;
 								case 73: /* CTRL + I */
 									// TODO: Creating modals should be a method on the documentEditor
-									$( "#bex-dlg-insert" ).dialog({
-										modal: true,
-										title: 'Insert Node',
-										close: function(){
-											if (self.button){
-												self.button.focus();
-											}
-										},
-										buttons: {
-											"Add Element": function() {
-												var xmlforinsertion = '' + $( this ).find('#bex-xmlforinsertion').val();
-												if(xmlforinsertion == '' ){xmlforinsertion = '<element/>';}
-												var method = $( this ).find(':checked').val();
-												/* alert (method+' ' + xmlforinsertion); */
-												$(controller).bexparentnode(
-													method,
-													$('<li/>')
-														.bexelement(
-															{'from': $($.parseXML(xmlforinsertion).documentElement) }
-														)
-												);
-												$( this ).dialog( "close" );
-											},
-											"Cancel": function() {
-												$( this ).dialog( "close" );
-											}
-										}
-									});
+									e.preventDefault();
+									e.stopPropagation();
+									var bexdocument = self.element.parents('.bex-document').first().find('>textarea').first();
+									bexdocument.bexdocument('spawnmodal', 'insertNode');
+									// $( "#bex-dlg-insert" ).dialog({
+									// 	modal: true,
+									// 	title: 'Insert Node',
+									// 	close: function(){
+									// 		if (self.button){
+									// 			self.button.focus();
+									// 		}
+									// 	},
+									// 	buttons: {
+									// 		"Add Element": function() {
+									// 			var xmlforinsertion = '' + $( this ).find('#bex-xmlforinsertion').val();
+									// 			if(xmlforinsertion == '' ){xmlforinsertion = '<element/>';}
+									// 			var method = $( this ).find(':checked').val();
+									// 			/* alert (method+' ' + xmlforinsertion); */
+									// 			$(controller).bexparentnode(
+									// 				method,
+									// 				$('<li/>')
+									// 					.bexelement(
+									// 						{'from': $($.parseXML(xmlforinsertion).documentElement) }
+									// 					)
+									// 			);
+									// 			$( this ).dialog( "close" );
+									// 		},
+									// 		"Cancel": function() {
+									// 			$( this ).dialog( "close" );
+									// 		}
+									// 	}
+									// });
 									break;
 
 							}
@@ -182,6 +187,12 @@
 									break;
 							}
 
+						}
+					}).keydown(function(e){
+						var w = e.which;
+						if (w == 73 || w == 46 || ( w > 35 && w < 41 ) ) {
+							e.preventDefault();
+							e.stopPropagation();
 						}
 					});
 			return self;

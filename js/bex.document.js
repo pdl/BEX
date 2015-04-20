@@ -1,5 +1,23 @@
 (function($) {
-    $.widget("bex.bexdocument", {
+		$.widget("bex.bexdocument", {
+		dialogs: {
+			delete:     '<div id="bex-dlg-confirm-delete"><form>Are you sure you want to delete this?</form></div>',
+			insertNode: '<div id="bex-dlg-insert">\
+				<form>\
+					<div id="bex-insert-location">\
+						<input type="radio" id="insertPreceding" value="insertPreceding" name="bex-insert-location" /><label for="insertPreceding">Preceding</label>\
+						<input type="radio" id="insertFollowing" value="insertFollowing" name="bex-insert-location"" /><label for="insertFollowing">Following</label>\
+						<br/>\
+						<input type="radio" id="append" value="append" name="bex-insert-location" checked="checked" /><label for="append">Append</label>\
+						<input type="radio" id="prepend" value="prepend" name="bex-insert-location" /><label for="prepend">Prepend</label>\
+						<br/>\
+						<input type="radio" id="aroundSelf" name="bex-insert-location" /><label for="aroundSelf">Around</label>\
+						<input type="radio" id="aroundContents" name="bex-insert-location" /><label for="aroundContents">Wrap Contents</label>\
+						<textarea id="bex-xmlforinsertion" type="text"/>\
+					</div>\
+				</form>\
+				</div>'
+		},
 		options: {
 		},
 		_create: function() {
@@ -33,25 +51,23 @@
 				);
 			$(self.bexdocument).bexparentnode();
 			self.showtree();
-			var	bexdialogconfirmdelete = $('<div id="bex-dlg-confirm-delete"></div>').hide().appendTo(self.bexdocument);
-			var	bexdialoginsertnode = $('<div id="bex-dlg-insert">\
-<form>\
-	<div id="bex-insert-location">\
-		<input type="radio" id="insertPreceding" value="insertPreceding" name="bex-insert-location" /><label for="insertPreceding">Preceding</label>\
-		<input type="radio" id="insertFollowing" value="insertFollowing" name="bex-insert-location"" /><label for="insertFollowing">Following</label>\
-		<br/>\
-		<input type="radio" id="append" value="append" name="bex-insert-location" checked="checked" /><label for="append">Append</label>\
-		<input type="radio" id="prepend" value="prepend" name="bex-insert-location" /><label for="prepend">Prepend</label>\
-		<br/>\
-		<input type="radio" id="aroundSelf" name="bex-insert-location" /><label for="aroundSelf">Around</label>\
-		<input type="radio" id="aroundContents" name="bex-insert-location" /><label for="aroundContents">Wrap Contents</label>\
-		<textarea id="bex-xmlforinsertion" type="text"/>\
-	</div>\
-</form>\
-</div>').hide().appendTo(self.bexdocument);
 			$('#bex-insert-location').buttonset();
 			//zen_textarea.setup({pretty_break: true, use_tab: false});
 			return self;
+		},
+		spawnmodal: function(modalType, args){
+			var self    = this;
+			var overlay = $('<div class="bex-modal-overlay"></div>'); // todo: have only one and a stack of modals
+			var modal   = $('<div class="bex-modal"></div>');
+			overlay.append(modal);
+			var contents = $(self.dialogs[modalType]);
+			// if ( typeof contents == typeof function(){} ){
+			//   contents = contents(args);
+			// }
+			modal.append(contents);
+			self.bexdocument.append(overlay);
+			modal.bexmodal();
+			modal.focus();
 		},
 		showpreview: function(){
 			$(this.element).hide();
