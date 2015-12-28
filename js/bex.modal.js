@@ -1,16 +1,20 @@
 (function($) {
 	$.widget("bex.bexmodal", {
 		options: {
-
+			focusReturn: undefined,
 		},
 		_create: function() {
 			var self = this,
-				o = self.options,
-				el = self.element;
-      	return self;
+				o      = self.options,
+				el     = self.element;
+
+			return self;
 		},
 		destroy: function() {
 			this.element.empty().remove();
+			if (focusReturn) {
+				focusReturn.focus();
+			}
 		},
 		xml: function(){
 			return '';
